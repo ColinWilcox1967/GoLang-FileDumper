@@ -22,12 +22,12 @@ func Dump(data []byte, displayWidth int) {
 		for rowIndex := 0; rowIndex < displayWidth; rowIndex++ {
 			if offset + rowIndex < len(data) {
 				if displayableCharacter(data[offset+rowIndex]) {
-					str += fmt.Sprintf("%08b", data[offset + rowIndex])
+					str += fmt.Sprintf("%c", data[offset + rowIndex])
 				} else {
 					str += "."
 				}
 			} else {
-				str += fmt.Sprintf("%08b", 0)
+				str += fmt.Sprintf("%c", 0)
 			}
 		}
 		fmt.Println (str)		

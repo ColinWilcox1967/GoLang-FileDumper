@@ -6,7 +6,7 @@ import (
 
 	hex "./hex"
 	binary "./binary"
-	
+
 	fileutils "./fileutils"
 )
 
@@ -35,23 +35,18 @@ func showBanner() {
 
 func parseArguments() {
 
-	var hexMode, binaryMode bool
+	var binaryMode bool
 
 	flag.BoolVar(&silentMode, "silent", default_silent_mode, "Utility operating mode.")
 	flag.IntVar(&bytesPerRow, "width", default_bytes_per_row, "Number of bytes to display per row.")
-	flag.BoolVar(&hexMode, "hex", true, "Dump file contenns in hexadecimal.")
 	flag.BoolVar(&binaryMode, "binary", false, "Dump file contents in binary.")
 	flag.Parse()
 
 	// dump as specified with default as hex
-	if hexMode && binaryMode {
-		dumpMode = dump_as_hex
+	if binaryMode {
+		dumpMode = dump_as_binary
 	} else {
-		if hexMode {
-			dumpMode = dump_as_hex
-		} else if binaryMode {
-			dumpMode = dump_as_binary
-		} 
+		dumpMode = dump_as_hex
 	}
 
 	if bytesPerRow <= 0 {

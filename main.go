@@ -11,11 +11,12 @@ import (
 )
 
 const (
-	hexdump_creation_date = "2024"
+	hexdump_creation_date = "2023-2024"
 	hexdump_version = "0.2"
 
 	default_silent_mode = false
 	default_bytes_per_row = 8
+	default_source_file = "TEST.TXT"
 
 	// data dump modes
 	dump_as_hex = 0
@@ -26,6 +27,7 @@ var (
 	silentMode bool = default_silent_mode
 	bytesPerRow int = default_bytes_per_row
 	dumpMode int = dump_as_hex
+	sourceFile string = default_source_file
 )
 
 func showBanner() {
@@ -40,6 +42,7 @@ func parseArguments() {
 	flag.BoolVar(&silentMode, "silent", default_silent_mode, "Utility operating mode.")
 	flag.IntVar(&bytesPerRow, "width", default_bytes_per_row, "Number of bytes to display per row.")
 	flag.BoolVar(&binaryMode, "binary", false, "Dump file contents in binary.")
+	flag.StringVar(&sourceFile, "file", default_source_file, "Path of file to be dumped.")
 	flag.Parse()
 
 	// dump as specified with default as hex
@@ -61,7 +64,7 @@ func main() {
 		showBanner()
 	}
 
-	data, err := fileutils.ReadFile("test.txt")
+	data, err := fileutils.ReadFile(sourceFile)
 	if err == nil {
 		switch(dumpMode) {
 			case dump_as_hex: hex.Dump(data, bytesPerRow)

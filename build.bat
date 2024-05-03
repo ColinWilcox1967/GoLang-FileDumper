@@ -1,2 +1,2 @@
 @echo off
-go build -o gdump.exe main.go
+go build -o fdump.exe main.go
